@@ -1,7 +1,7 @@
 module Spree
   module CheckoutHelper
-    def wrapper_class
-      klass = @order.confirm? && 'omega sixteen' || 'twelve'
+    def wrapper_class state
+      klass = confirm?(state) && 'omega sixteen' || 'twelve'
       %Q|columns alpha #{klass}|
     end
 
@@ -10,7 +10,7 @@ module Spree
     end
 
     def step_class state
-      state = 'disabled-step' unless state == @order.state
+      state = 'disabled-step' unless @order.send("#{state}?")
       %Q|row checkout_content #{state}|
     end
 
