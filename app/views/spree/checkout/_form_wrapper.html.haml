@@ -1,0 +1,13 @@
+%div{ class: wrapper_class(state), data: { hook: 'checkout_form_wrapper' } }
+
+  = render partial: 'spree/shared/error_messages', locals: { target: @order }
+
+  = form_for @order, url: update_checkout_path(state),
+    remote: !confirm?(state),
+    html: { id: "checkout_form_#{state}" } do |form|
+    = render state, form: form
+
+- unless confirm?(state)
+  #checkout-summary.columns.omega.four{ data: { hook: 'checkout_summary_box' } }
+    = render partial: 'summary', locals: { order: @order }
+

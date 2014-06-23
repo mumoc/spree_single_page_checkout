@@ -1,0 +1,13 @@
+#checkout{ data: { hook: '' } }
+  - order_states.each do |state|
+    %div{ class: step_class(state), id: "checkout_#{state}",
+          data: { hook: 'checkout_content', step: state } }
+      = render partial: 'form_wrapper', locals: { state: state }
+
+:javascript
+  Spree.current_order_id = "#{@order.number}"
+  Spree.current_order_token = "#{@order.token}"
+
+- if I18n.locale != :en
+  %script{ src: "#{assets_prefix}/jquery.validate/localization/messages_#{I18n.locale}.js" }
+
