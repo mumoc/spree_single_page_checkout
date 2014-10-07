@@ -2,7 +2,7 @@ window.SinglePageCheckout ||= {}
 
 class SinglePageCheckout.StepHandler
   constructor: (@$step, @partial, @error) ->
-    @constructor.disableSteps ($ '.checkout_content')
+    @constructor.disableSteps ($ '.checkout-content')
 
   #Class Methods
   @_toggleElements: ($elements, status) ->
